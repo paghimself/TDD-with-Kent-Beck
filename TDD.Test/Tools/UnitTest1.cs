@@ -9,8 +9,10 @@ namespace TDD.Test.Tools
         public void TestMultiplication()
         {
             var five = new Dollar(5);
-            five.Times(2);
-            Assert.Equal(10, five.Amount);
+            var product = five.Times(2);  
+            Assert.Equal(10, product.Amount);
+            product = five.Times(3);
+            Assert.Equal(15, product.Amount);
         }
     }
 }
