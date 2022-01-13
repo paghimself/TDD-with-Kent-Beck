@@ -1,6 +1,6 @@
 ﻿namespace TDD.Tools
 {
-    public abstract class Money
+    public class Money
     {
         protected int amount;
         protected string currency;
@@ -11,8 +11,11 @@
             this.currency = currency;
         }
 
-        public abstract Money Times(int amount);
+        public Money Times(int multiplier)
+        {
+            return new Money(amount * multiplier, currency);
 
+        }
 
         public string Currency()
         {
@@ -31,13 +34,9 @@
 
         public override bool Equals(object obj)
         {
-            if (this.GetType() == obj.GetType())
-            {
-                Money money = (Money)obj;
-                return amount == money.amount;
-            }
-
-            return false;
+            Money money = (Money)obj;
+            return amount == money.amount
+                && Currency().Equals(money.Currency());
         }
 
 
@@ -49,6 +48,14 @@
 
 
 
+
+
+
+
+        public override string ToString()
+        {
+            return amount + " " + currency;
+        }
 
         public override int GetHashCode()
         {

@@ -6,10 +6,10 @@
         {
         }
 
-        public override Money Times(int multiplier)
-        {
-            return Money.Franc(amount * multiplier);
-        }
+        //public override Money Times(int multiplier)
+        //{
+        //    return new Money(amount * multiplier, currency);
+        //}
 
     }
 }
