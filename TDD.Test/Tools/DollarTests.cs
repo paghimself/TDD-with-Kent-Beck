@@ -37,8 +37,8 @@ namespace TDD.Test.Tools
 
 
 
-       //Addition
-       [Fact]
+        //Addition
+        [Fact]
         public void TestSimpleAddition()
         {
             Money five = Money.Dollar(5);
@@ -73,6 +73,22 @@ namespace TDD.Test.Tools
             Bank bank = new Bank();
             Money result = bank.Reduce(Money.Dollar(1), "USD");
             Assert.Equal(Money.Dollar(1), result);
+        }
+
+        [Fact]
+        public void TestReduceMoneyDifferentCurrency()
+        {
+            // Assuming 2USD == 1CHF
+            var bank = new Bank();
+            bank.AddRate("CHF", "USD", 2);
+            Money result = bank.Reduce(Money.Franc(2), "USD");
+            Assert.Equal(Money.Dollar(1), result);
+        }
+
+        [Fact]
+        public void TestIdentifyRate()
+        {
+            Assert.Equal(1, new Bank().Rate("USD", "USD"));
         }
 
 
