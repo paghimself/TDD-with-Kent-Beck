@@ -1,30 +1,31 @@
 ﻿namespace TDD.Tools
 {
-    public class Money : Expression
+    public class Money : IExpression
     {
-        protected int amount;
-        protected string currency;
+        public int Amount { get; private set; }
+        public string Currency { get; private set; }
 
         public Money(int amount, string currency)
         {
-            this.amount = amount;
-            this.currency = currency;
+            Amount = amount;
+            Currency = currency;
         }
+
 
         public Money Times(int multiplier)
         {
-            return new Money(amount * multiplier, currency);
+            return new Money(Amount * multiplier, Currency);
 
         }
 
-        public Expression Plus(Money addend)
+        public IExpression Plus(Money addend)
         {
-            return new Money(amount + addend.amount, currency);
+            return new Sum(this, addend);
         }
 
-        public string Currency()
+        public Money Reduce(string to)
         {
-            return currency;
+            return this;
         }
 
         public static Money Dollar(int amount)
@@ -40,8 +41,8 @@
         public override bool Equals(object obj)
         {
             Money money = (Money)obj;
-            return amount == money.amount
-                && Currency().Equals(money.Currency());
+            return Amount == money.Amount
+                && Currency.Equals(money.Currency);
         }
 
 
@@ -59,7 +60,7 @@
 
         public override string ToString()
         {
-            return amount + " " + currency;
+            return Amount + " " + Currency;
         }
 
         public override int GetHashCode()

@@ -1,6 +1,7 @@
 ﻿namespace TDD.Tools
 {
-    public interface Expression
+    public interface IExpression
     {
+        Money Reduce(string to);
     }
 }
