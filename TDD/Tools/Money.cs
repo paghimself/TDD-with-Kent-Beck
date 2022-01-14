@@ -1,6 +1,6 @@
 ﻿namespace TDD.Tools
 {
-    public class Money
+    public class Money : Expression
     {
         protected int amount;
         protected string currency;
@@ -15,6 +15,11 @@
         {
             return new Money(amount * multiplier, currency);
 
+        }
+
+        public Expression Plus(Money addend)
+        {
+            return new Money(amount + addend.amount, currency);
         }
 
         public string Currency()

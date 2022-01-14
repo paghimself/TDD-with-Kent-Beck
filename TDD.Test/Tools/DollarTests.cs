@@ -14,15 +14,18 @@ namespace TDD.Test.Tools
         }
 
 
+
         // Multiplication
         [Fact]
         public void TestDollarMultiplication()
         {
-            var five = Money.Dollar(5);
+            Money five = Money.Dollar(5);
             Assert.Equal(Money.Dollar(10), five.Times(2));
             Assert.Equal(Money.Dollar(15), five.Times(3));
         }
        
+
+
         // Equality
         [Fact]
         public void TestEquality()
@@ -30,6 +33,19 @@ namespace TDD.Test.Tools
             Assert.True(Money.Dollar(5).Equals(Money.Dollar(5)));
             Assert.False(Money.Dollar(5).Equals(Money.Dollar(6)));
             Assert.False(Money.Franc(5).Equals(Money.Dollar(5)));
+        }
+
+
+
+        // Addition
+        [Fact]
+        public void TestSimpleAddition()
+        {
+            Money five = Money.Dollar(5);
+            Expression sum = five.Plus(five);
+            Bank bank = new Bank();
+            Money reduced = bank.Reduce(sum, "USD");
+            Assert.Equal(Money.Dollar(10), reduced);
         }
 
 
